@@ -297,6 +297,23 @@ input[type="range"]::-moz-range-thumb {
 }
 .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
 .btn-ghost { background: transparent; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-color: transparent;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover { border-color: transparent; filter: brightness(1.05); }
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+}
 
 .file-input {
   position: relative;

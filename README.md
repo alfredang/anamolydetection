@@ -19,6 +19,8 @@ no chart libraries.
   highlighted anomaly points, and hover tooltips. No chart library used.
 - **Results panel** — total points, anomaly count, anomaly rate, sorted list of
   anomaly indices and values, plus a scrollable data table.
+- **Export to CSV** — one-click download of `index, value, status` for every
+  point, with a header line recording the method and threshold used.
 - **Dark / light mode** — token-based theming, persisted in `localStorage`.
 - **Friendly validation** — inline error banner for unparseable input.
 - **Responsive layout** — CSS Grid that collapses to a single column on small

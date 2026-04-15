@@ -18,6 +18,7 @@
   const fileName       = $('fileName');
   const sampleBtn      = $('sampleBtn');
   const clearBtn       = $('clearBtn');
+  const downloadBtn    = $('downloadBtn');
   const errorBanner    = $('errorBanner');
   const methodSelect   = $('methodSelect');
   const slider         = $('thresholdSlider');
@@ -147,6 +148,7 @@
     renderTable();
     renderChart();
     emptyState.hidden = state.raw.length > 0;
+    downloadBtn.disabled = state.raw.length === 0;
   }
 
   function renderStats() {
@@ -360,6 +362,28 @@
     thresholdValue.textContent = state.threshold.toFixed(1);
   }
 
+  // ---------- CSV export ----------
+  function downloadResultsCsv() {
+    if (!state.raw.length) return;
+    const methodLabel = state.method === 'zscore' ? 'Z-score' : 'IQR';
+    const header = `# method=${methodLabel}, threshold=${state.threshold.toFixed(2)}, total=${state.raw.length}, anomalies=${state.anomalies.size}\nindex,value,status\n`;
+    const rows = state.raw.map((v, i) =>
+      `${i},${v},${state.anomalies.has(i) ? 'anomaly' : 'normal'}`
+    ).join('\n');
+    const csv = header + rows + '\n';
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `anomaly-results-${ts}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 0);
+  }
+
   // ---------- Sample data ----------
   function buildSample() {
     const arr = [];
@@ -414,6 +438,8 @@
     dataInput.value = buildSample();
     handleInput();
   });
+
+  downloadBtn.addEventListener('click', downloadResultsCsv);
 
   clearBtn.addEventListener('click', () => {
     dataInput.value = '';

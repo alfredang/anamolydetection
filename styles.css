@@ -539,6 +539,14 @@ tbody tr.is-anomaly:nth-child(odd) { background: var(--anomaly-soft); }
   color: var(--text-muted);
   font-size: 12px;
 }
+.app-footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.app-footer a:hover {
+  text-decoration: underline;
+}
 
 /* ============ Animations ============ */
 @keyframes pop {

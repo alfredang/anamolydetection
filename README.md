@@ -8,6 +8,8 @@ no chart libraries.
 > *GitHub Actions*). The included workflow publishes the site automatically on
 > every push to `main`.
 
+![Anomaly Detection Dashboard](screenshot.png)
+
 ## Features
 
 - **Dual data input** — paste comma-separated numbers, or upload a `.csv` file.
